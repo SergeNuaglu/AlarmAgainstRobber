@@ -6,7 +6,6 @@ public class Alarm : MonoBehaviour
 {
     [SerializeField] private Light _alarmLight;
     [SerializeField] private AudioSource _alarmSound;
-    [SerializeField] private bool _isWork;
     [SerializeField] private float _blinkDuration;
 
     public void TurnOnAlarm()
@@ -17,24 +16,28 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator Work()
     {
+        bool isWork = true;
         float mixingRate = 0;
+        float timeBeforeAlarm = 0.5f;
+        int minValue = 0;
+        int maxValue = 1;
+        
+        yield return new WaitForSeconds(timeBeforeAlarm);
 
-        yield return new WaitForSeconds(0.5f);
-
-        while (_isWork)
+        while (isWork)
         {
-            if (mixingRate <= 0)
+            if (mixingRate <= minValue)
             {
-                while (mixingRate < 1)
+                while (mixingRate < maxValue)
                 {
                     Blink(mixingRate);
                     mixingRate += Time.deltaTime / _blinkDuration;
                     yield return null;
                 }
             }
-            else if (mixingRate >= 1)
+            else if (mixingRate >= maxValue)
             {
-                while (mixingRate > 0)
+                while (mixingRate > minValue)
                 {
                     Blink(mixingRate);
                     mixingRate -= Time.deltaTime / _blinkDuration;
