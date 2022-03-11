@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(NavMeshAgent))]
+
 public class RobberMovement : MonoBehaviour
 {
     [SerializeField] private Transform _path;

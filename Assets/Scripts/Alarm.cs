@@ -11,7 +11,7 @@ public class Alarm : MonoBehaviour
     public void TurnOnAlarm()
     {
         StartCoroutine(Work());
-        _alarmSound.GetComponent<AudioSource>().Play();
+        _alarmSound.Play();
     }
 
     private IEnumerator Work()
